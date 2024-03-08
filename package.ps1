@@ -22,7 +22,7 @@ try {
 
     # Give the service time to start and then check that it's responding to requests
     Start-Sleep -Seconds 3
-    Invoke-WebRequest -Uri http://localhost:8082/heartbeat
+    Invoke-WebRequest -Uri http://127.0.0.1:8082/heartbeat
     
 
     Write-Host "The container was successfully built."
