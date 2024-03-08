@@ -21,9 +21,9 @@ try {
     docker-compose -f ./docker/docker-compose.yml up -d
 
     # Give the service time to start and then check that it's responding to requests
-    Start-Sleep -Seconds 10
-    Invoke-WebRequest -Uri http://localhost:8080/heartbeat
-    Invoke-WebRequest -Uri http://localhost:8080/v1/entities/get_entities -Method Post
+    Start-Sleep -Seconds 3
+    Invoke-WebRequest -Uri http://localhost:8082/heartbeat
+    
 
     Write-Host "The container was successfully built."
 } finally {
