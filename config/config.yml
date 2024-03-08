@@ -1,0 +1,44 @@
+---
+# Container descriptor
+- descriptor: "pip-services:context-info:default:default:1.0"
+  name: "alias"
+  description: "Alias microservice"
+
+# Console logger
+- descriptor: "pip-services:logger:console:default:1.0"
+  level: "trace"
+
+# Tracer that posts records to log
+- descriptor: "pip-services:tracer:log:default:1.0"
+
+# Performance counters that post values to log
+- descriptor: "pip-services:counters:log:default:1.0"
+
+#Sqlite persistence
+- descriptor: alias:persistence:sqlite:default:1.0
+  connection:
+    database: {{SQLITE_DB}}{{#unless SQLITE_DB}}./storage/storage.db{{/unless}}
+
+# Controller
+- descriptor: "alias:controller:default:default:1.0"
+
+# Shared HTTP Endpoint
+- descriptor: "pip-services:endpoint:http:default:1.0"
+  connection:
+    protocol: http
+    host: 0.0.0.0
+    port: {{HTTP_PORT}}{{#unless HTTP_PORT}}8082{{/unless}}
+
+# Swagger Service
+- descriptor: "pip-services:swagger-service:http:default:1.0"
+
+# HTTP Service V1
+- descriptor: "alias:service:http:default:1.0"
+  swagger:
+    enable: true
+
+# Hearbeat service
+- descriptor: "pip-services:heartbeat-service:http:default:1.0"
+
+# Status service
+- descriptor: "pip-services:status-service:http:default:1.0"
